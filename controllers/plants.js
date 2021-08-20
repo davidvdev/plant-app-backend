@@ -10,14 +10,16 @@ router.get("/seed", async(req,res) => {
         await Plant.deleteMany({})
         // calls the tropical fruits and veggie api for 101 plants
         const url = "http://tropicalfruitandveg.com/api/tfvjsonapi.php"
-        const seedData = await (await fetch(url + "?search=a")).json()
+        const search = "?search=guav"
+        const seedData = await (await fetch(url + search)).json()
         // transform the seedData so it aligns with the model
         const formattedData = await seedData.results.map(item => {
+           
             return (
             {
                 type : item.tfvname,
                 botName: item.botname,
-                otherNames: item.othname.split(", ")
+                otherNames: item.othname.split(", "),
             })
         })
         await Plant.insertMany(formattedData)
