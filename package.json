@@ -9,5 +9,22 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.12"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "backend",
+  "description": "Have you ever had so many plants that you forget which one to water? Well, look no further, here is an app dedicated for plant enthusiasts to make sure that all your plants stay healthy.",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidvdev/plant-app-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidvdev/plant-app-backend/issues"
+  },
+  "homepage": "https://github.com/davidvdev/plant-app-backend#readme"
 }
