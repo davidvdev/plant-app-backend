@@ -2,7 +2,6 @@ const {Router} = require('express')
 const Plant = require('../models/plant')
 const router = Router()
 const fetch = require('node-fetch')
-// const seedData = require('../db/plants.json')
 
 // seed
 router.get("/seed", async(req,res) => {
@@ -14,10 +13,6 @@ router.get("/seed", async(req,res) => {
         const seedData = await (await fetch(url + "?search=a")).json()
         // transform the seedData so it aligns with the model
         const formattedData = await seedData.results.map(item => {
-            // let rObj = {}
-            // rObj[item.tfvname] = "name"
-            // rObj[item.botname] = "botName"
-            // rObj[item.othname] = "otherNames"
             return (
             {
                 type : item.tfvname,
@@ -25,7 +20,6 @@ router.get("/seed", async(req,res) => {
                 otherNames: item.othname.split(", ")
             })
         })
-        console.log('formattedData: ',formattedData)
         await Plant.insertMany(formattedData)
         res.json({
             status: 200,
@@ -51,11 +45,56 @@ router.get("/", async(req,res) => {
 })
 
 // show
+router.get("/:id", async(req,res) => {
+    try{
+        const plant = await Plant.findById(req.params.id)
+        res.json({
+            status: 200,
+            data: plant
+        })
+    }catch(err){
+        res.status(400).json(err)
+    }
+})
 
 // create
+router.post("/", async(req,res) => {
+    try{
+        const newPlant = await Plant.create(req.body)
+        res.json({
+            status: 200,
+            data: newPlant
+        })
+    }catch(err){
+        res.status(400).json(err)
+    }
+})
 
 // update
+router.put("/:id", async(req,res) => {
+    try{
+        const updatedPlant = await Plant.findByIdAndUpdate(req.params.id, req.body, {new:true})
+        res.json({
+            status: 200,
+            data: updatedPlant
+        })
+    }catch(err){
+        res.status(400).json(err)
+    }
+})
 
 // destroy
+router.delete("/:id", async(req,res) => {
+    try{
+        const deletedPlant = await Plant.findByIdAndDelete(req.params.id)
+        res.json({
+            status: 200,
+            data: deletedPlant
+        })
+    }catch(err){
+        res.status(400).json(err)
+    }
+})
+
 
 module.exports = router

@@ -8,7 +8,7 @@ const plantSchema = new Schema(
         "type": {type: String, require:true},
         "botName": String,
         "otherNames": Array,
-        "description": {type: String, require:true},
+        "description": {type: String, require:true, default:""},
         "picture": {type: String, require:false}
     }
 )
