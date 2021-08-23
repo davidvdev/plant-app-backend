@@ -60,6 +60,13 @@ note: using these routes requires user authentication. Test these routes via ins
 ```
 Returns JSON with all of the user's plants in the database.
 
+### DUE TODAY
+```
+/myplants/duetoday/:date
+```
+Returns an array with all plants that are due to be water on the date passed as a param. The date format must follow `Aug-23-2021` style formatting.
+*This may be altered down the line to work with a string on numbers instead.*
+
 ### SHOW
 ```
 /myplants/<:id>

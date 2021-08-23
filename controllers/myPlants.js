@@ -22,23 +22,21 @@ router.get("/", isLoggedIn, async (req,res) => {
 })
 
 // Task Arr Due Today
-router.get("/duetoday", isLoggedIn, async(req,res) => {
+router.get("/duetoday/:date", isLoggedIn, async(req,res) => {
     try{
-        // const { username } = req.user
-        // const myPlants = await MyPlant.find({username}).populate('plantType')
-        // const today = Date.now()
-        // console.log('today: ', today)
-        // const dueToday = await myPlants.map(plant => {
-        //     return {
-
-        //     }
-        // })
-        // console.log('dueToday: ', dueToday)
-        // res.json ({
-        //     status: 200,
-        //     today: today,
-        //     data: dueToday
-        // })
+        const { username } = req.user
+        const myPlants = await MyPlant.find({username}).populate('plantType')
+        const today = req.params.date.toLowerCase()
+        const dueToday = await myPlants.map(plant => {
+                return {
+                    lastWatering : plant.lastWatering.toString().toLowerCase().split(" ").splice(1,3).toString().replaceAll(",","-")
+                }
+        }).filter(task => today === task.lastWatering)
+        res.json ({
+            status: 200,
+            today: today,
+            data: dueToday
+        })
 
     }catch(err){
         res.status(400).json({err})
