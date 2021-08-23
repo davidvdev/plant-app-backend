@@ -36,7 +36,7 @@ router.get("/:id", isLoggedIn, async (req,res) => {
 })
 
 // Create route with isLoggedIn middleware and selectable Plant
-router.post("/plantid/", isLoggedIn, async (req,res)=> {
+router.post("/", isLoggedIn, async (req,res)=> {
     try{
         const {username} = req.user
         req.body.username = username
