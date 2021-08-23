@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('../db/connection')
 const {Schema, model} = mongoose
 
 // insert a default picture for all plants
@@ -9,7 +9,8 @@ const plantSchema = new Schema(
         "botName": String,
         "otherNames": Array,
         "description": {type: String, required:true, default:""},
-        "picture": {type: String, required:false}
+        "picture": {type: String, required:false},
+        "waterFrequency":{type: Number, default:1}
     }
 )
 
