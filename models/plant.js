@@ -5,11 +5,11 @@ const {Schema, model} = mongoose
 
 const plantSchema = new Schema(
     {
-        "type": {type: String, require:true},
+        "type": {type: String, required:true},
         "botName": String,
         "otherNames": Array,
-        "description": {type: String, require:true, default:""},
-        "picture": {type: String, require:false}
+        "description": {type: String, required:true, default:""},
+        "picture": {type: String, required:false}
     }
 )
 
