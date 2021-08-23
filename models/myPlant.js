@@ -5,6 +5,7 @@ const {Schema, model} = mongoose
 
 const myPlantSchema = new Schema(
     {
+        "nickname": String,
         "username": {type: String, required: true},
         "plantType" : {
             ref: 'Plant',

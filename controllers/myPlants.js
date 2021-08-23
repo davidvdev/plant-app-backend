@@ -1,5 +1,6 @@
 const { Router } = require("express")
 const MyPlant = require('../models/myPlant')
+const Plant = require('../models/plant')
 const { isLoggedIn} = require('./middleware')
 
 const router = Router()
@@ -25,7 +26,7 @@ router.get("/:id", isLoggedIn, async (req,res) => {
     )
 })
 
-// Create router with isLoggedIn middleware
+// Create route with isLoggedIn middleware
 router.post("/", isLoggedIn, async (req,res)=> {
     const {username} = req.user
     req.body.username = username
@@ -34,6 +35,22 @@ router.post("/", isLoggedIn, async (req,res)=> {
         await MyPlant.create(req.body).catch((error) =>
         res.status(400).json({ error }))
     )
+})
+
+// Create route with isLoggedIn middleware and selectable Plant
+router.post("/plantid/", isLoggedIn, async (req,res)=> {
+    const {username} = req.user
+    req.body.username = username
+    // create a new myplant and send in respnose
+    const newPlant = await MyPlant.create(req.body)
+    const plantType = await Plant.findById(req.body.plantid)
+
+    res.json({
+        newPlant: newPlant,
+        plantType: plantType
+    })
+
+   
 })
 
 // Update route with isLoggedIn middleware
