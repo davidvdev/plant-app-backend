@@ -11,10 +11,35 @@ router.get("/", isLoggedIn, async (req,res) => {
         // get username from req.user property create by isLoggedIn middleware
         const { username } = req.user
         // send all myplant with that user
-        res.json(
-            await MyPlant.find({username}).catch((error) =>
-            res.status(400).json({error}))
-        )
+        const myPlants = await MyPlant.find({username}).populate('plantType')
+        res.json({
+            status: 200,
+            data: myPlants
+        })
+    }catch(err){
+        res.status(400).json({err})
+    }
+})
+
+// Task Arr Due Today
+router.get("/duetoday", isLoggedIn, async(req,res) => {
+    try{
+        // const { username } = req.user
+        // const myPlants = await MyPlant.find({username}).populate('plantType')
+        // const today = Date.now()
+        // console.log('today: ', today)
+        // const dueToday = await myPlants.map(plant => {
+        //     return {
+
+        //     }
+        // })
+        // console.log('dueToday: ', dueToday)
+        // res.json ({
+        //     status: 200,
+        //     today: today,
+        //     data: dueToday
+        // })
+
     }catch(err){
         res.status(400).json({err})
     }
@@ -62,7 +87,7 @@ router.put("/:id", isLoggedIn, async (req,res) => {
         const {username} = req.user
         req.body.username = username
         const _id = req.params.id
-        const updatedPlant = await MyPlant.updateOne({username, _id}, req.body, {new: true})
+        const updatedPlant = await MyPlant.updateOne({username, _id}, req.body, {new: true}).populate('plantType')
         // update myplant with the same id if it belongs to logged in user
         res.json({
             status: 200,
