@@ -46,6 +46,7 @@ router.put("/seed-details", async(req,res) => {
                 return (
                 {
                     picture : item.imageurl,
+                    description: item.description,
                     uses: item.uses,
                     propagation: item.propagation,
                     soil : item.soil,
