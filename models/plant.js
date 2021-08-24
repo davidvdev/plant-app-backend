@@ -10,7 +10,12 @@ const plantSchema = new Schema(
         "otherNames": Array,
         "description": {type: String, required:true, default:""},
         "picture": {type: String, required:false},
-        "waterFrequency":{type: Number, default:1}
+        "waterFrequency":{type: Number, default:1},
+        "uses": {type: String, required: true, default:""},
+        "propagation": {type: String, required: true, default:""},
+        "soil": {type: String, required: true, default:""},
+        "climate": {type: String, required: true, default:""},
+        "health": {type: String, required: true, default:""}
     }
 )
 
