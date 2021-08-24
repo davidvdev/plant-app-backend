@@ -32,6 +32,42 @@ router.get("/seed", async(req,res) => {
         res.status(400).json(err)
     }
 })
+// seed details
+router.put("/seed-details", async(req,res) => {
+    try{
+        const plants = await Plant.find({})
+        const updates = await plants.map(async(plant)  => {
+            const url = "http://www.tropicalfruitandveg.com/api/tfvjsonapi.php?tfvitem="
+            const searchTerm = await plant.type.replaceAll(" ","%20")
+            const data = await fetch(url + searchTerm)
+            const jsondata = await data.json()
+            const formattedData = await jsondata.results.map(item => {
+           
+                return (
+                {
+                    picture : item.imageurl,
+                    description: item.description,
+                    uses: item.uses,
+                    propagation: item.propagation,
+                    soil : item.soil,
+                    climate : item.climate,
+                    health : item.health
+                })
+            })
+            const updated = await Plant.findByIdAndUpdate(plant._id, ...formattedData, {new:true})
+            return updated
+        })   
+        const data = await Promise.all(updates)
+        res.json({
+            status: 200,
+            data
+        })
+        
+        
+    }catch(err){
+        res.status(400).json({err})
+    }
+})
 
 // index
 router.get("/", async(req,res) => {
