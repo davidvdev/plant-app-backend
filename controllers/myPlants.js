@@ -23,15 +23,23 @@ router.get("/", isLoggedIn, async (req,res) => {
 
 // Task Arr Due Today
 router.get("/duetoday/:date", isLoggedIn, async(req,res) => {
-    try{
+    try{        
         const { username } = req.user
+
+        // find all myPlants, return an array with plants that need to be watered today
+        // if lastWatering + waterFrequency = today's date, add to array
         const myPlants = await MyPlant.find({username}).populate('plantType')
         const today = req.params.date.toLowerCase()
-        const dueToday = await myPlants.map(plant => {
-                return {
-                    lastWatering : plant.lastWatering.toString().toLowerCase().split(" ").splice(1,3).toString().replaceAll(",","-")
-                }
-        }).filter(task => today === task.lastWatering)
+
+        const dueToday = await myPlants.filter(plant => {
+            const task = plant.lastWatering.toString().toLowerCase().split(" ").splice(1,3).toString().replaceAll(",","-")
+            today === task})
+
+        // const dueToday = await myPlants.map(plant => {
+        //         return {
+        //             lastWatering : plant.lastWatering.toString().toLowerCase().split(" ").splice(1,3).toString().replaceAll(",","-")
+        //         }
+        // }).filter(task => today === task.lastWatering)
         res.json ({
             status: 200,
             today: today,
