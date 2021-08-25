@@ -106,7 +106,7 @@ router.put("/:id", isLoggedIn, async (req,res) => {
         const {username} = req.user
         req.body.username = username
         const _id = req.params.id
-        const updatedPlant = await MyPlant.updateOne({username, _id}, req.body, {new: true}).populate('plantType')
+        const updatedPlant = await MyPlant.findByIdAndUpdate({username, _id}, req.body, {new: true}).populate('plantType')
         // update myplant with the same id if it belongs to logged in user
         res.json({
             status: 200,
@@ -124,7 +124,7 @@ router.delete("/:id", isLoggedIn, async(req,res) => {
         const _id = req.params.id
         // remove myplant with the same id if it belongs to logged in user
         res.json(
-            await MyPlant.remove({ username, _id}).catch((error) => 
+            await MyPlant.findByIdAndDelete({ username, _id}).catch((error) => 
             res.status(400).json({ error }))
         )
     }catch(err){
