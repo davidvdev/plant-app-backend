@@ -51,11 +51,11 @@ Have you ever had so many plants that you forget which one to water? Well, look 
 - the ability to add new plants to the app
     - users should also be able to select the type of plant they have and the app will pull in extra information about that specific type.
 - full functioning backend that manages and transforms all data for the front end
+- Login/User Auth
+- Swap dummy data for live API data called on backend
 
 ### Post-MVP
 - Desktop Layout
-- Login/User Auth
-- Swap dummy data for live API data called on backend
 - Schedule/Calendar view page
 
 ## Components - Descriptions
