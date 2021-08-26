@@ -1,32 +1,81 @@
 {
   
   "name": "backend",
+  
   "description": "Have you ever had so many plants that you forget which one to water? Well, look no further, here is an app dedicated for plant enthusiasts to make sure that all your plants stay healthy.",
+  
   "version": "1.0.0",
+  
   "main": "server.js",
+  
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/davidvdev/plant-app-backend.git"
+  
+    
+  "type": "git",
+  
+    
+  "url": "git+https://github.com/davidvdev/plant-app-backend.git"
+  
   },
+  
   "author": "",
+  
   "license": "ISC",
+  
   "bugs": {
-    "url": "https://github.com/davidvdev/plant-app-backend/issues"
+  
+    
+  "url": "https://github.com/davidvdev/plant-app-backend/issues"
+  
   },
+  
   "homepage": "https://github.com/davidvdev/plant-app-backend#readme",
+  
   "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "mongoose": "^5.13.7",
-    "morgan": "^1.10.0",
-    "node-fetch": "^2.6.1"
+  
+    
+  "bcryptjs": "^2.4.3",
+  
+    
+  "cors": "^2.8.5",
+  
+    
+  "dotenv": "^10.0.0",
+  
+    
+  "express": "^4.17.1",
+  
+    
+  "jsonwebtoken": "^8.5.1",
+  
+    
+  "mongoose": "^5.13.7",
+  
+    
+  "morgan": "^1.10.0",
+  
+    
+  "node": "^16.6.1",
+  
+    
+  "node-fetch": "^2.6.1"
+  
   },
+  
   "devDependencies": {
-    "nodemon": "^2.0.12"
+  
+    
+  "nodemon": "^2.0.12"
+  
   },
+  
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
+  
+    
+  "start": "node server.js",
+  
+    
+  "dev": "nodemon server.js"
+  
   }
 }
